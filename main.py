@@ -84,6 +84,29 @@ class Reviewer(Mentor):
         return f'Имя: {self.name}\nФамилия: {self.surname}'
 
 
+def students_m_grade(students, course):
+    a = []
+    if not isinstance(students, list):
+        return
+    for student in students:
+        if isinstance(student, Student) and course in student.grades.keys():
+            a += student.grades[course]
+    if not len(a):
+        return
+    return sum(a)/len(a)
+
+
+def lectors_m_grade(lectors, course):
+    a = []
+    if not isinstance(lectors, list):
+        return
+    for lector in lectors:
+        if isinstance(lector, Lecturer) and course in lector.grades.keys():
+            a += lector.grades[course]
+    if not len(a):
+        return
+    return sum(a)/len(a)
+
 best_reviewer = Reviewer('Jack', 'Ivanov') 
 best_student = Student('Ruoy', 'Eman', 'your_gender')
 best_student.courses_in_progress += ['Python']
@@ -158,3 +181,9 @@ print(lecturer_1 == lecturer_2)
 print(lecturer_1 < lecturer_2)
 print(lecturer_1 > lecturer_2)
 print(lecturer_1 == lecturer_2)
+
+
+# Calculate mean grades
+
+print(students_m_grade([student_1, student_2], 'Python'))
+print(lectors_m_grade([lecturer_1, lecturer_2], 'Python'))
